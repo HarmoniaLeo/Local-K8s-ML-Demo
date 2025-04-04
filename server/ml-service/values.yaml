@@ -1,0 +1,59 @@
+replicaCount: 1
+
+# Note that the information should be consistent with the Docker image built
+image:
+  repository: ml-service
+  tag: v1.0
+  pullPolicy: IfNotPresent
+
+# The service type ClusterIP is used to expose the service within the cluster
+service:
+  type: ClusterIP
+  port: 8000
+
+# The resources are limitated to reduce the processing performance of a single pod
+# so even in a single machine, we can simulate the performance improvement of multiple pod processing 
+resources:
+  limits:
+    cpu: 500m
+    memory: 2Gi
+  requests:
+    cpu: 125m
+    memory: 1Gi
+
+# The Readiness probe is mainly responsible for checking whether the application has been connected to Redis
+readinessProbe:
+  httpGet:
+    path: /ready
+    port: 5000
+  initialDelaySeconds: 5
+  periodSeconds: 5
+  failureThreshold: 1000
+
+# The HPA settings for k8s helps control the number of replicas of pods
+autoscaling:
+  enabled: true # Disable this if you want to use KEDA
+  minReplicas: 1
+  maxReplicas: 1
+  targetCPUUtilizationPercentage: 80
+
+# Enable Prometheus ServiceMonitor
+prometheus:
+  enabled: false
+
+# KEDA settings
+keda:
+  enabled: false
+
+scaledObject:
+  pollingInterval: 5
+  cooldownPeriod: 30
+  minReplicaCount: 1
+  maxReplicaCount: 2
+  triggers:
+    - type: redis-streams
+      metadata:
+        address: "my-redis-master.default.svc.cluster.local:6379"
+        stream: "image_stream"  # Input Redis Stream
+        consumerGroup: "image_processing_group"  # Consumer group of the input Redis Stream
+        pendingEntriesCount: "5"  # The number of messages processed by each pod

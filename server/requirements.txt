@@ -1,0 +1,10 @@
+flask==3.0.3
+numpy==1.26.4
+tensorflow==2.16.1
+keras==3.8.0
+fastapi==0.115.6
+uvicorn==0.34.0
+aiofiles==24.1.0
+python-multipart==0.0.20
+Pillow==11.1.0
+redis==4.5.4

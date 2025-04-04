@@ -1,0 +1,31 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+visualization/node_modules
+visualization/.pnp
+visualization/.pnp.js
+
+# testing
+visualization/coverage
+
+# production
+visualization/build
+
+# misc
+.DS_Store
+visualization/.env.local
+visualization/.env.development.local
+visualization/.env.test.local
+visualization/.env.production.local
+
+visualization/npm-debug.log*
+visualization/yarn-debug.log*
+visualization/yarn-error.log*
+
+# dataset
+visualization/imgs
+train/data
+
+# checkpoints
+train/checkpoints
+server/checkpoints

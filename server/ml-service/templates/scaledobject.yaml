@@ -1,0 +1,26 @@
+{{- if .Values.keda.enabled }}
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: {{ include "ml-service.fullname" . }}-scaledobject
+  namespace: default
+  labels:
+    app: {{ include "ml-service.name" . }}
+    chart: {{ include "ml-service.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  scaleTargetRef:
+    name: {{ include "ml-service.fullname" . }} 
+  pollingInterval: {{ .Values.scaledObject.pollingInterval | default 5 }}
+  cooldownPeriod: {{ .Values.scaledObject.cooldownPeriod | default 30 }}
+  minReplicaCount: {{ .Values.scaledObject.minReplicaCount | default 1 }}
+  maxReplicaCount: {{ .Values.scaledObject.maxReplicaCount | default 2 }}
+  triggers:
+    - type: redis-streams
+      metadata:
+        address: {{ .Values.scaledObject.triggers[0].metadata.address | quote }}
+        stream: {{ .Values.scaledObject.triggers[0].metadata.stream | quote }}
+        consumerGroup: {{ .Values.scaledObject.triggers[0].metadata.consumerGroup | quote }}
+        pendingEntriesCount: {{ .Values.scaledObject.triggers[0].metadata.pendingEntriesCount | quote }}
+{{- end }}

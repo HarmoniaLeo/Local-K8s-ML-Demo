@@ -1,0 +1,307 @@
+.container {
+    padding: 24px;
+    max-width: 960px;
+    margin: 0 auto;
+}
+
+.header {
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header h1 {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.refresh-time {
+    margin-top: 24px;
+}
+
+.refresh-time h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.refresh-time-box {
+    background-color: #2d3748;
+    color: #000;
+    padding: 16px;
+    border-radius: 8px;
+}
+
+.main-grid {
+    display: flex;
+    gap: 16px;
+}
+
+.left-panel, .right-panel {
+    flex: 1;
+}
+
+
+.pods-visualization {
+    margin-bottom: 24px;
+}
+
+.pods-visualization h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.pods-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.pod {
+    cursor: pointer;
+    width: 128px;
+    height: 128px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.pod-running {
+    background-color: #38a169;
+}
+
+.pod-failed {
+    background-color: #e53e3e;
+}
+
+.pod-status {
+    font-size: 14px;
+}
+
+.pod-timestamp {
+    font-size: 12px;
+    margin-top: 8px;
+}
+
+.hidden-file-input {
+    display: none;
+}
+
+.upload-container {
+    margin-bottom: 16px;
+}
+
+.upload-button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border-radius: 8px;
+    background-color: #4299e1;
+    color: #fff;
+    transition: background-color 0.3s;
+    cursor: pointer;
+}
+
+.upload-button:hover {
+    background-color: #3182ce;
+}
+
+.upload-button-disabled {
+    background-color: #a0aec0;
+    cursor: not-allowed;
+}
+
+.last-process-time {
+    margin-top: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #718096;
+}
+
+.results-container {
+    max-height: 700px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 400px; 
+}
+
+.result-item {
+    padding: 16px;
+    background-color: #f7fafc;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.result-item:hover {
+    background-color: #edf2f7;
+}
+
+.result-content {
+    display: flex;
+    align-items: flex-start;
+}
+
+.result-image {
+    margin-right: 16px;
+}
+
+.result-image img {
+    max-width: 100px;
+    height: auto;
+    border-radius: 8px;
+}
+
+.result-info {
+    flex: 1;
+}
+
+.result-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+}
+
+.result-filename {
+    font-weight: 500;
+    align-items: start;
+}
+
+.result-time {
+    font-size: 14px;
+    color: #718096;
+}
+
+.result-details {
+    margin-top: 8px;
+    text-align: left;
+}
+
+.result-class,
+.result-confidence,
+.result-pod {
+    margin-bottom: 4px;
+}
+
+.result-class {
+    color: #38a169;
+}
+
+.result-confidence {
+    color: #4299e1;
+}
+
+.result-pod {
+    font-size: 14px;
+    color: #718096;
+}
+
+.no-results {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #718096;
+}
+
+.command-line {
+    margin-top: 32px;
+    width: 450px;
+}
+
+.command-line-header {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.command-line-output {
+    background-color: #1a202c;
+    color: #e2e8f0;
+    padding: 16px;
+    border-radius: 8px;
+    height: 400px;
+    overflow-y: auto;
+    font-family: monospace;
+    text-align: left;
+}
+
+.command-output {
+    margin-top: 8px;
+    color: #a0aec0;
+    white-space: pre;
+    text-align: left;
+}
+
+.command {
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+}
+
+.command-timestamp {
+    font-size: 14px;
+    color: #718096;
+    margin-right: 8px;
+}
+
+.command-text {
+    color: #68d391;
+}
+
+.separator {
+    display: inline-block;
+    width: 30px;
+}
+
+.replica-controls {
+    margin-top: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.replica-controls label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.replica-controls input {
+    width: 80px;
+    padding: 4px;
+}
+
+.replica-controls button {
+    padding: 8px 16px;
+    background-color: #4299e1;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.replica-controls button:hover {
+    background-color: #3182ce;
+}
+
+.pod-ready {
+    background-color: #4caf50;
+}
+
+.pod-not-ready {
+    background-color: #f44336;
+}
