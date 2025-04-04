@@ -20,7 +20,27 @@ This example consists of the following parts:
 
 ![flowchart](media/flowchart.png)
 
-[TOC]
+- [K8s-based ML Service Deployment on a Single Machine](#k8s-based-ml-service-deployment-on-a-single-machine)
+  - [Overview](#overview)
+    - [Technology Stack](#technology-stack)
+    - [Architecture Diagram](#architecture-diagram)
+  - [1. Neural Network Training](#1-neural-network-training)
+    - [1.1 File Structure](#11-file-structure)
+    - [1.2 Environment Setup](#12-environment-setup)
+    - [1.3 Training](#13-training)
+  - [2. Service Deployment](#2-service-deployment)
+    - [2.1 File Structure](#21-file-structure)
+    - [2.2 Deployment Steps](#22-deployment-steps)
+  - [3. Service Demonstration](#3-service-demonstration)
+    - [3.1 File Structure](#31-file-structure)
+    - [3.2 Setup](#32-setup)
+    - [3.3 Demonstration](#33-demonstration)
+      - [3.3.1 UI Layout](#331-ui-layout)
+      - [3.3.2 Demonstration Process](#332-demonstration-process)
+  - [4. Enhancements](#4-enhancements)
+    - [4.1 Monitoring with Prometheus + Grafana](#41-monitoring-with-prometheus--grafana)
+    - [4.2 Auto-scaling with Keda](#42-auto-scaling-with-keda)
+
 
 ## 1. Neural Network Training
 
@@ -161,11 +181,11 @@ Open `train/train_model.ipynb`, select the KMNIST virtual environment as the ker
 
 1. Click **Upload Image** and upload `visualization/imgs/sample_0.jpg`. This image is recognized as "お", with a processing time of 2081ms, handled by the only running pod.  
 
-   ![截屏2025-04-01 23.45.14](media/截屏2025-04-01 23.45.14.png)  
+   ![截屏2025-04-0123.45.14](media/截屏2025-04-0123.45.14.png)  
 
 2. Click **Upload Image** and upload images from `sample_0` to `sample_20`, a total of 21 images. The processing time is significantly longer compared to uploading a single image.  
 
-   ![截屏2025-04-01 23.46.28](media/截屏2025-04-01 23.46.28.png)  
+   ![截屏2025-04-0123.46.28](media/截屏2025-04-0123.46.28.png)  
 
 To better deploy this service, our goal is to achieve three key objectives: **scalability, parallel processing, and high availability**. Currently, we have only one user and one service. This setup has two major issues:  
 
@@ -187,11 +207,11 @@ This architecture ensures that:
 
 1. **Increase min and max replicas to 2**, then click **Update Replicas** to increase the number of pods.  
 
-   ![截屏2025-04-01 23.47.03](media/截屏2025-04-01 23.47.03.png)  
+   ![截屏2025-04-0123.47.03](media/截屏2025-04-0123.47.03.png)  
 
    Then, click **Upload Image** and upload images from `sample_0` to `sample_20`. This time, the processing time is significantly reduced, as two service instances share the workload.  
 
-   ![截屏2025-04-01 23.48.11](media/截屏2025-04-01 23.48.11.png)  
+   ![截屏2025-04-0123.48.11](media/截屏2025-04-0123.48.11.png)  
 
 2. **Simulating a service failure**:  
 
@@ -199,13 +219,13 @@ This architecture ensures that:
    - During processing, click on one pod to shut it down, simulating a failure.  
    - Since the **HPA Min Replicas is set to 2**, Kubernetes ensures that the number of pods does not drop below 2, so it automatically starts a new pod.  
 
-   ![截屏2025-04-01 23.48.32](media/截屏2025-04-01 23.48.32.png)  
+   ![截屏2025-04-0123.48.32](media/截屏2025-04-0123.48.32.png)  
 
    - The remaining active pod continues processing images.  
    - The new pod starts processing as soon as it becomes ready.  
    - After processing, we can see that **all three pods participated**, and during the downtime, the remaining pod handled the workload.  
 
-   ![截屏2025-04-01 23.50.44](media/截屏2025-04-01 23.50.44.png)  
+   ![截屏2025-04-0123.50.44](media/截屏2025-04-0123.50.44.png)  
 
 3. **Optimizing resource usage**:  
 
@@ -213,17 +233,17 @@ This architecture ensures that:
 
    - Set **Min Replicas and Max Replicas to 1** to scale down.  
 
-     ![截屏2025-04-01 23.51.03](media/截屏2025-04-01 23.51.03.png)  
+     ![截屏2025-04-0123.51.03](media/截屏2025-04-0123.51.03.png)  
 
    - Keep **Min Replicas at 1** and increase **Max Replicas to 2**.  
    - Upload images again; an additional pod is automatically created to handle the increased workload.  
 
-     ![截屏2025-04-01 23.52.07](media/截屏2025-04-01 23.52.07.png)  
-     ![截屏2025-04-01 23.52.19](media/截屏2025-04-01 23.52.19.png)  
+     ![截屏2025-04-0123.52.07](media/截屏2025-04-0123.52.07.png)  
+     ![截屏2025-04-0123.52.19](media/截屏2025-04-0123.52.19.png)  
 
    - Once processing is completed, the additional pod is automatically shut down.  
 
-     ![截屏2025-04-01 23.52.36](media/截屏2025-04-01 23.52.36.png)  
+     ![截屏2025-04-0123.52.36](media/截屏2025-04-0123.52.36.png)  
 
 In this demonstration, we manually adjusted HPA parameters via **Helm**, which is a basic approach. In a production environment, **KEDA** can be used for **automatic scaling**, which will be discussed in the next section.
 
