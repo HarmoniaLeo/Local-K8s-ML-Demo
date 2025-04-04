@@ -2,6 +2,28 @@
 
 This is a demonstration of deploying a machine learning service on Kubernetes using a single machine, such as a MacBook.
 
+[K8s-based ML Service Deployment on a Single Machine](#k8s-based-ml-service-deployment-on-a-single-machine)
+
+- [Overview](#overview)
+  - [Technology Stack](#technology-stack)
+  - [Architecture Diagram](#architecture-diagram)
+- [1. Neural Network Training](#1-neural-network-training)
+  - [1.1 File Structure](#11-file-structure)
+  - [1.2 Environment Setup](#12-environment-setup)
+  - [1.3 Training](#13-training)
+- [2. Service Deployment](#2-service-deployment)
+  - [2.1 File Structure](#21-file-structure)
+  - [2.2 Deployment Steps](#22-deployment-steps)
+- [3. Service Demonstration](#3-service-demonstration)
+  - [3.1 File Structure](#31-file-structure)
+  - [3.2 Setup](#32-setup)
+  - [3.3 Demonstration](#33-demonstration)
+    - [3.3.1 UI Layout](#331-ui-layout)
+    - [3.3.2 Demonstration Process](#332-demonstration-process)
+- [4. Enhancements](#4-enhancements)
+  - [4.1 Monitoring with Prometheus + Grafana](#41-monitoring-with-prometheus--grafana)
+  - [4.2 Auto-scaling with Keda](#42-auto-scaling-with-keda)
+
 ## Overview
 
 This example consists of the following parts:
@@ -19,27 +41,6 @@ This example consists of the following parts:
 ### Architecture Diagram
 
 ![flowchart](media/flowchart.png)
-
-- [K8s-based ML Service Deployment on a Single Machine](#k8s-based-ml-service-deployment-on-a-single-machine)
-  - [Overview](#overview)
-    - [Technology Stack](#technology-stack)
-    - [Architecture Diagram](#architecture-diagram)
-  - [1. Neural Network Training](#1-neural-network-training)
-    - [1.1 File Structure](#11-file-structure)
-    - [1.2 Environment Setup](#12-environment-setup)
-    - [1.3 Training](#13-training)
-  - [2. Service Deployment](#2-service-deployment)
-    - [2.1 File Structure](#21-file-structure)
-    - [2.2 Deployment Steps](#22-deployment-steps)
-  - [3. Service Demonstration](#3-service-demonstration)
-    - [3.1 File Structure](#31-file-structure)
-    - [3.2 Setup](#32-setup)
-    - [3.3 Demonstration](#33-demonstration)
-      - [3.3.1 UI Layout](#331-ui-layout)
-      - [3.3.2 Demonstration Process](#332-demonstration-process)
-  - [4. Enhancements](#4-enhancements)
-    - [4.1 Monitoring with Prometheus + Grafana](#41-monitoring-with-prometheus--grafana)
-    - [4.2 Auto-scaling with Keda](#42-auto-scaling-with-keda)
 
 
 ## 1. Neural Network Training
